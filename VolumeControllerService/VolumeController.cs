@@ -1,48 +1,19 @@
 ﻿namespace VolumeControllerService
 {
     using System;
-    using System.ComponentModel.Composition;
-    using System.Net;
-    using System.Threading.Tasks;
-
-    [Export(typeof(IService))]
-    [PartCreationPolicy(CreationPolicy.Shared)]
-    public class VolumeController : IService
+    using System.Web.Http;
+    public class VolumeController
     {
-        private HttpListener _listener;
-        public void Start()
+        [HttpGet]
+        public void GetVolume(Guid id)
         {
-            CreateHttpListener();
-            InitializeListening();
+
         }
 
-        public void Stop()
+        [HttpPost]
+        public void UpdateVolume(Guid id, int volume)
         {
-            _listener?.Stop();
-            _listener?.Close();
-            (_listener as IDisposable)?.Dispose();
-        }
 
-        public void CreateHttpListener()
-        {
-            _listener = new HttpListener
-            {
-                Prefixes = {  "http://volumecontroller.com/Request/" },
-            };
-        }
-
-        private void InitializeListening()
-        {
-            _listener.Start();
-
-            //Task.Run(() =>
-            //{
-                while (_listener.IsListening)
-                {
-                    var context = _listener.GetContext();
-                    Console.WriteLine(context.Request);
-                }
-            //});
         }
     }
 }
