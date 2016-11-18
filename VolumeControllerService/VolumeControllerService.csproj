@@ -94,6 +94,7 @@
     <Compile Include="Services\ILocalVolumeService.cs" />
     <Compile Include="Services\LocalVolumeService.cs" />
     <Compile Include="VolumeController.cs" />
+    <Compile Include="VolumeControllerService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
