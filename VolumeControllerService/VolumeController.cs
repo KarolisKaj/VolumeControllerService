@@ -1,13 +1,15 @@
 ﻿namespace VolumeControllerService
 {
+    using Contracts;
     using System;
+    using System.Net.Http;
     using System.Web.Http;
-    public class VolumeController
+    public class VolumeController : ApiController
     {
         [HttpGet]
-        public void GetVolume(Guid id)
+        public IHttpActionResult GetVolume(Guid id)
         {
-
+            return Ok(new VolumeResponse { CurrentPCVolume = 50, ID = id, IsSuccess = true });
         }
 
         [HttpPost]
