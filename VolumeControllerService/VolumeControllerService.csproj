@@ -93,7 +93,6 @@
     <Compile Include="REST\StartUpConfig.cs" />
     <Compile Include="Services\ILocalVolumeService.cs" />
     <Compile Include="Services\LocalVolumeService.cs" />
-    <Compile Include="VolumeControllerService.cs" />
     <Compile Include="VolumeController.cs" />
   </ItemGroup>
   <ItemGroup>
