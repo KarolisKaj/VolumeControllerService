@@ -1,9 +1,11 @@
 ﻿namespace VolumeControllerService.Services
 {
+    using AudioSwitcher.AudioApi;
+    using System;
     public interface ILocalVolumeService
     {
         int GetVolumeLevel();
-        bool SetVolumeLevel();
-        // Maybe event, try to get a change.
+        bool SetVolumeLevel(int volume);
+        IObservable<DeviceVolumeChangedArgs> VolumeObservable { get; }
     }
 }

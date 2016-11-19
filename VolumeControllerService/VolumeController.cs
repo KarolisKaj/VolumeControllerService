@@ -1,20 +1,25 @@
 ﻿namespace VolumeControllerService
 {
     using Contracts;
+    using Services;
     using System;
     using System.Web.Http;
     public class VolumeController : ApiController
     {
+        public static ILocalVolumeService LocalVolumeService { get; set; }
+        // Call: http://localhost/api/volume/0f8fad5b-d9cb-469f-a165-70867728950e/0
         [HttpGet]
         public IHttpActionResult GetVolume(Guid id)
         {
-            return Ok(new VolumeResponse { CurrentPCVolume = 50, ID = id, IsSuccess = true });
+            return Ok(new VolumeResponse { CurrentPCVolume = LocalVolumeService.GetVolumeLevel(), ID = id, IsSuccess = true });
         }
 
-        [HttpPost]
-        public void UpdateVolume(Guid id, int volume)
+        [HttpGet]
+        public IHttpActionResult UpdateVolume(Guid id, int volume)
         {
-
+            LocalVolumeService.SetVolumeLevel(volume);
+            var currentVolume = LocalVolumeService.GetVolumeLevel();
+            return Ok(new VolumeResponse { CurrentPCVolume = currentVolume, ID = id, IsSuccess = currentVolume == volume });
         }
     }
 }
