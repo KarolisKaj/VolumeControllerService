@@ -8,17 +8,23 @@
     using Observer;
     [Export(typeof(IService))]
     [PartCreationPolicy(CreationPolicy.Shared)]
-    public class VolumeControllerService : IService
+    public class VolumeControllerService : IService, IDisposable
     {
         private IDisposable _listener;
         private IDisposable _observable;
 
         [Import]
         public ILocalVolumeService LocalVolumeService { get; set; }
+
+        public void Dispose()
+        {
+            _listener?.Dispose();
+            _observable?.Dispose();
+        }
+
         public void Start()
         {
             VolumeController.LocalVolumeService = LocalVolumeService;
-            LocalVolumeService.SetVolumeLevel(0);
             _observable = LocalVolumeService
                 .VolumeObservable
                 .Subscribe(v =>
@@ -38,11 +44,7 @@
             }
         }
 
-        public void Stop()
-        {
-            _listener?.Dispose();
-            _observable?.Dispose();
-        }
+        public void Stop() => Dispose();
 
         private IDisposable InitializeListener(string baseURL) => WebApp.Start<StartUpConfig>(baseURL);
     }

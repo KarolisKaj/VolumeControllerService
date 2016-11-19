@@ -8,6 +8,7 @@
         public Bootstrapper()
         {
             InitializeService(Container.GetExportedValue<IService>());
+            FreeUpDependencies();
         }
 
         public CompositionContainer Container { get; set; } = new CompositionContainer(new ApplicationCatalog());
@@ -29,5 +30,7 @@
                 x.SetServiceName("VolumeControllerService");
             });
         }
+
+        private void FreeUpDependencies() => Container?.Dispose();
     }
 }

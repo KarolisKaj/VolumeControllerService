@@ -6,6 +6,7 @@
     using System.Web.Http;
     public class VolumeController : ApiController
     {
+        // Hack but oh well I am not in control of creating this instance.
         public static ILocalVolumeService LocalVolumeService { get; set; }
         // Call: http://localhost/api/volume/0f8fad5b-d9cb-469f-a165-70867728950e/0
         [HttpGet]
