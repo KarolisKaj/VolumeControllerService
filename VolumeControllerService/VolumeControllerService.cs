@@ -6,6 +6,8 @@
     using System.ComponentModel.Composition;
     using System;
     using Observer;
+    using Values;
+
     [Export(typeof(IService))]
     [PartCreationPolicy(CreationPolicy.Shared)]
     public class VolumeControllerService : IService, IDisposable
@@ -33,7 +35,7 @@
                 });
             try
             {
-                _listener = InitializeListener("http://localhost/");
+                _listener = InitializeListener(URLDetails.FullURL);
             }
             catch (Exception ex)
             {
