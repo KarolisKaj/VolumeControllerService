@@ -11,6 +11,7 @@
     {
         public LocalVolumeService()
         {
+            // TODO: Inject logger into ct
             PrimaryDevice = new CoreAudioController().DefaultPlaybackDevice;
             VolumeObservable = PrimaryDevice.VolumeChanged;
         }
@@ -26,6 +27,7 @@
             }
             catch (Exception ex)
             {
+                // TODO: Log
                 Console.WriteLine("Was not able to set volume.");
                 return false;
             }

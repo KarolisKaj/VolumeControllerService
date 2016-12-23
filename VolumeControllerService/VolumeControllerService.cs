@@ -14,6 +14,7 @@
     {
         private IDisposable _listener;
         private IDisposable _observable;
+        // TODO: Inject logger into ctor.
 
         [Import]
         public ILocalVolumeService LocalVolumeService { get; set; }
@@ -39,6 +40,7 @@
             }
             catch (Exception ex)
             {
+                // TODO: Log.
                 Stop();
                 Console.WriteLine("App crashed, bye!");
                 Console.ReadKey();
