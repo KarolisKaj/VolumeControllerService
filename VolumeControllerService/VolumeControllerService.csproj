@@ -97,10 +97,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Contracts\CurrentVolumeRequest.cs" />
     <Compile Include="Contracts\ResponseBase.cs" />
-    <Compile Include="Contracts\VolumeRequest.cs" />
-    <Compile Include="Contracts\VolumeResponse.cs" />
+    <Compile Include="Contracts\VolumeInfoResponse.cs" />
+    <Compile Include="Contracts\VolumeUpdateResponse.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="Observer\Observer.cs" />
     <Compile Include="Observer\ObservableExtensions.cs" />
