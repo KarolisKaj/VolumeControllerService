@@ -14,21 +14,29 @@
     {
         private IDisposable _listener;
         private IDisposable _observable;
-        // TODO: Inject logger into ctor.
+        private readonly ILocalVolumeService _localVolumeService;
+        private readonly IDiscoveryService _discoveryService;
 
-        [Import]
-        public ILocalVolumeService LocalVolumeService { get; set; }
+        // TODO: Inject logger into ctor.
+        [ImportingConstructor]
+        public VolumeControllerService(ILocalVolumeService localVolumeService, IDiscoveryService discoveryService)
+        {
+            _discoveryService = discoveryService;
+            _localVolumeService = localVolumeService;
+        }
 
         public void Dispose()
         {
             _listener?.Dispose();
             _observable?.Dispose();
+            _discoveryService?.Dispose();
         }
 
         public void Start()
         {
-            VolumeController.LocalVolumeService = LocalVolumeService;
-            _observable = LocalVolumeService
+            _discoveryService.Start();
+            VolumeController.LocalVolumeService = _localVolumeService;
+            _observable = _localVolumeService
                 .VolumeObservable
                 .Subscribe(v =>
                 {
@@ -36,7 +44,7 @@
                 });
             try
             {
-                _listener = InitializeListener(URLDetails.FullURL);
+                _listener = InitializeListener(CommuncationDetails.FullURL);
             }
             catch (Exception ex)
             {

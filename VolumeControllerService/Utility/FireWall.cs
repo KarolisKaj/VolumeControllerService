@@ -23,8 +23,9 @@
             inboundRule.Enabled = true;
             inboundRule.Action = NET_FW_ACTION_.NET_FW_ACTION_ALLOW;
             inboundRule.Protocol = 6;
-            inboundRule.LocalPorts = URLDetails.Port;
+            inboundRule.LocalPorts = CommuncationDetails.Port;
             inboundRule.Name = ApplicationData.ServiceName;
+            inboundRule.RemotePorts = CommuncationDetails.Port;
             inboundRule.ApplicationName = appLocation;
             inboundRule.serviceName = ApplicationData.ServiceName;
 
