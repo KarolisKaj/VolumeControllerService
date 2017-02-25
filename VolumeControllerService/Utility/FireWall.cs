@@ -25,7 +25,6 @@
             inboundRule.Protocol = 6;
             inboundRule.LocalPorts = CommuncationDetails.Port;
             inboundRule.Name = ApplicationData.ServiceName;
-            inboundRule.RemotePorts = CommuncationDetails.Port;
             inboundRule.ApplicationName = appLocation;
             inboundRule.serviceName = ApplicationData.ServiceName;
 
