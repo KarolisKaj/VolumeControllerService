@@ -25,8 +25,7 @@
             inboundRule.Protocol = 6;
             inboundRule.LocalPorts = CommuncationDetails.Port;
             inboundRule.Name = ApplicationData.ServiceName;
-            inboundRule.ApplicationName = appLocation;
-            inboundRule.serviceName = ApplicationData.ServiceName;
+            inboundRule.serviceName = "*"; // For all services. Services only.
 
             inboundRule.Profiles = currentProfiles;
 
