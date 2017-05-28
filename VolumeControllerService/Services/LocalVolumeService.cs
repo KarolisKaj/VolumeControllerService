@@ -11,7 +11,7 @@
     {
         public LocalVolumeService()
         {
-            // TODO: Inject logger into ct
+            // TODO: Inject logger into ctor
             PrimaryDevice = new CoreAudioController().DefaultPlaybackDevice;
             VolumeObservable = PrimaryDevice.VolumeChanged;
         }

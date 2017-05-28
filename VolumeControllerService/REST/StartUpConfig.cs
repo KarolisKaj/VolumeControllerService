@@ -2,7 +2,6 @@
 {
     using Owin;
     using System.Web.Http;
-    using System.Web.Http.Dependencies;
 
     public class StartUpConfig
     {

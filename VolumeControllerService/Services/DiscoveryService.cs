@@ -18,8 +18,6 @@ namespace VolumeControllerService.Services
         private const string ClientMessage = "Volume Controller Service Discovery String.";
         private UdpClient _udpClient;
 
-
-
         public void Start()
         {
             Task.Run(() => StartListening());
@@ -57,19 +55,23 @@ namespace VolumeControllerService.Services
                 var clientMessage = _udpClient.EndReceive(ar, ref client);
                 if (Encoding.ASCII.GetString(clientMessage) == ClientMessage)
                 {
-                    byte[] bytes = Encoding.ASCII.GetBytes(Message);
-                    client.Port = CommuncationDetails.PortUDP;
-                    var temp = new UdpClient();
-                    temp.Connect(client);
-                    temp.Send(bytes, bytes.Length);
+                    using (TcpClient tcpClient = new TcpClient(client.Address.ToString(), CommuncationDetails.PortUDP))
+                    {
+                        using (NetworkStream nwStream = tcpClient.GetStream())
+                        {
+                            byte[] bytesToSend = Encoding.ASCII.GetBytes(Message);
+                            tcpClient.GetStream().Write(bytesToSend, 0, bytesToSend.Length);
+                        }
+                    }
                 }
             }
             catch (Exception ex)
             {
-
+                System.Diagnostics.Debug.WriteLine(ex);
+                
+                // Log
             }
             _resetEvent.Set();
-            // Return Volume Controlled Server. Confirmed.
         }
 
         public void Dispose()

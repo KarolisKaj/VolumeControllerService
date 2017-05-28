@@ -5,7 +5,7 @@
     using Utility;
     using Values;
 
-    // Windows REmote Management - Compatibility Mode (HTTP-In) in firewall inbound must be enabled.
+    // Windows Remote Management - Compatibility Mode (HTTP-In) in firewall inbound must be enabled.
     public class Bootstrapper
     {
         public Bootstrapper()
@@ -15,7 +15,7 @@
             InitializeService(Container.GetExportedValue<IService>());
         }
 
-        public CompositionContainer Container { get; set; } = new CompositionContainer(new ApplicationCatalog());
+        public CompositionContainer Container { get; } = new CompositionContainer(new ApplicationCatalog());
 
         private void InitializeService(IService service)
         {
