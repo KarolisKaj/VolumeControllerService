@@ -4,7 +4,6 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using VolumeControllerService.Values;
 
 namespace VolumeControllerService.Services
@@ -17,10 +16,10 @@ namespace VolumeControllerService.Services
         private const string Message = "Received. I am Volume control server!";
         private const string ClientMessage = "Volume Controller Service Discovery String.";
         private UdpClient _udpClient;
-
+        public IPAddress ClientIP { get; private set; }
         public void Start()
         {
-            Task.Run(() => StartListening());
+            new Thread(_ => StartListening()) { IsBackground = true }.Start();
         }
 
         private void StartListening()
@@ -55,7 +54,8 @@ namespace VolumeControllerService.Services
                 var clientMessage = _udpClient.EndReceive(ar, ref client);
                 if (Encoding.ASCII.GetString(clientMessage) == ClientMessage)
                 {
-                    using (TcpClient tcpClient = new TcpClient(client.Address.ToString(), CommuncationDetails.PortUDP))
+                    ClientIP = client.Address;
+                    using (TcpClient tcpClient = new TcpClient(client.Address.ToString(), CommuncationDetails.PortTCP))
                     {
                         using (NetworkStream nwStream = tcpClient.GetStream())
                         {
@@ -68,7 +68,7 @@ namespace VolumeControllerService.Services
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex);
-                
+
                 // Log
             }
             _resetEvent.Set();

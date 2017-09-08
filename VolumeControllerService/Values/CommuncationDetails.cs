@@ -5,5 +5,6 @@
         public const string FullURL = "http://*:" + Port + @"/";
         public const string Port = "63714";
         public const int PortUDP = 63715;
+        public const int PortTCP = 63716;
     }
 }

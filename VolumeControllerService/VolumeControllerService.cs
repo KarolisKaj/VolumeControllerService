@@ -41,6 +41,7 @@
                 .Subscribe(v =>
                 {
                     // GET REQUESTS TO PHONE
+                    //_discoveryService.ClientIP
                 });
             try
             {
