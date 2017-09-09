@@ -4,8 +4,13 @@
     [Serializable]
     public abstract class ResponseBase
     {
-        public Guid ID { get; set; }
-        public int Volume { get; set; }
+        public ResponseBase(Guid id, int volume)
+        {
+            ID = id;
+            Volume = volume;
+        }
+        public Guid ID { get; }
+        public int Volume { get; }
         public string MachinesName { get; } = Environment.MachineName;
     }
 }

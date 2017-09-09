@@ -12,7 +12,7 @@
         [HttpGet]
         public IHttpActionResult GetVolume(Guid id)
         {
-            return Ok(new VolumeUpdateResponse { Volume = LocalVolumeService.GetVolumeLevel(), ID = id, IsSuccess = true });
+            return Ok(new VolumeUpdateResponse(id, LocalVolumeService.GetVolumeLevel(), true));
         }
 
         [HttpGet]
@@ -20,7 +20,7 @@
         {
             LocalVolumeService.SetVolumeLevel(volume);
             var currentVolume = LocalVolumeService.GetVolumeLevel();
-            return Ok(new VolumeUpdateResponse { Volume = currentVolume, ID = id, IsSuccess = currentVolume == volume });
+            return Ok(new VolumeUpdateResponse(id, currentVolume, currentVolume == volume));
         }
     }
 }

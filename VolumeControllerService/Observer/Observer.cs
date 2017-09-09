@@ -10,8 +10,7 @@
 
         public void OnError(Exception error)
         {
-            Console.WriteLine("Observer died :(((");
-            Console.WriteLine(error.StackTrace);
+            System.Diagnostics.Debug.WriteLine(error.StackTrace);
         }
 
         public void OnNext(T value) => _onNext(value);
