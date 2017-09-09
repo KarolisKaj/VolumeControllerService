@@ -15,7 +15,7 @@
             InitializeService(Container.GetExportedValue<IService>());
         }
 
-        public CompositionContainer Container { get; } = new CompositionContainer(new ApplicationCatalog());
+        private CompositionContainer Container { get; } = new CompositionContainer(new ApplicationCatalog());
 
         private void InitializeService(IService service)
         {

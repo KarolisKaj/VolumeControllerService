@@ -15,7 +15,7 @@
             return Ok(new VolumeUpdateResponse(id, LocalVolumeService.GetVolumeLevel(), true));
         }
 
-        [HttpGet]
+        [HttpPost]
         public IHttpActionResult UpdateVolume(Guid id, int volume)
         {
             LocalVolumeService.SetVolumeLevel(volume);
